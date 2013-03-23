@@ -8,3 +8,4 @@ opencsv-2.3/
 primefaces-3.5/
 testdata/
 war/WEB-INF/classes
+war/WEB-INF/appengine-generated/

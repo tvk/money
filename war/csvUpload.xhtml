@@ -2,9 +2,15 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Insert title here</title>
+<title>CSV Upload</title>
 </head>
 <body>
+
+	<!--
+	It seems that no jsf/primefaces upload implementation works in the app engine because 
+  	they all write a temporary file to the disk which is not allowed in the app engine. This
+  	is the reason for this simple plain upload servlet. 
+	-->
 
 	<form action="uploadCsvFile.servlet?accountNumber=#{param['accountNumber']}" enctype="multipart/form-data" method="post">
 		<input name="csvFile" type="file" size="50" maxlength="100000" accept="text/csv" />

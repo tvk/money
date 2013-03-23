@@ -16,6 +16,9 @@ import com.google.appengine.api.datastore.KeyFactory;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.FilterOperator;
 import com.google.appengine.api.datastore.Query.FilterPredicate;
+import com.google.appengine.api.users.User;
+import com.google.appengine.api.users.UserService;
+import com.google.appengine.api.users.UserServiceFactory;
 import com.google.appengine.labs.repackaged.com.google.common.collect.Lists;
 
 @ManagedBean
@@ -23,6 +26,9 @@ public class AccountStorage
 {
 	final DatastoreService datastore = 
 			DatastoreServiceFactory.getDatastoreService();
+	
+	final UserService userService = 
+			UserServiceFactory.getUserService();
 
 	/**
 	 * Stores a new account activity. If it is already stored, it will be replaced.
@@ -31,15 +37,19 @@ public class AccountStorage
 			final long accountNumber, final DateTime date, String receiver, String description, 
 			String reason, String currency, final double amount, final double balance)
 	{
+		final User user = this.userService.getCurrentUser();
+		if (user == null) throw new RuntimeException("No user!!");
+		
 		receiver = StringUtils.normalizeSpace(receiver);
 		description = StringUtils.normalizeSpace(description);
 		reason = StringUtils.normalizeSpace(reason);
 		currency = StringUtils.normalizeSpace(currency);
 		
 		final Key key = KeyFactory.createKey("AccountActivity", 
-				date.getMillis() + receiver + description + reason + currency + amount + balance);
+				user.getUserId() + date.getMillis() + receiver + description + reason + currency + amount + balance);
 		
 		final Entity entity = new Entity(key);
+		entity.setProperty("user", user.getUserId());
 		entity.setProperty("accountNumber", accountNumber);
 		entity.setProperty("date", date.getMillis());
 		entity.setProperty("receiver", receiver);
@@ -63,6 +73,7 @@ public class AccountStorage
 	{
 		final Query q = new Query("AccountActivity");
 		q.setFilter(new FilterPredicate("accountNumber", FilterOperator.EQUAL, accountNumber));
+		q.setFilter(new FilterPredicate("user", FilterOperator.EQUAL, this.userService.getCurrentUser().getUserId()));
 		if (from != null)
 			q.setFilter(new FilterPredicate("date", FilterOperator.GREATER_THAN_OR_EQUAL, from.getMillis()));
 		if (until != null)

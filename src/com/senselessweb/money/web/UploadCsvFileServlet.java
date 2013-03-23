@@ -14,6 +14,12 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import com.senselessweb.money.storage.AccountStorage;
 import com.senselessweb.money.storage.CsvParser;
 
+/**
+ * It seems that no jsf/primefaces upload implementation works in the app engine because 
+ * they all write a temporary file to the disk which is not allowed in the app engine. This
+ * is the reason for this simple plain upload servlet.  
+ * @author thomas
+ */
 public class UploadCsvFileServlet extends HttpServlet
 {
 

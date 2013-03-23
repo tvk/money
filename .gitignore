@@ -1,0 +1,10 @@
+ICEfaces-3.2.0-bin/
+commons-fileupload-1.2.2/
+commons-io-2.4/
+commons-lang3-3.1/
+joda-time-2.2/
+myfaces-core-2.1.10-bin/
+opencsv-2.3/
+primefaces-3.5/
+testdata/
+war/WEB-INF/classes

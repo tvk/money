@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Insert title here</title>
+	<link type="text/css" rel="stylesheet" href="#{request.contextPath}/css/default.css" />
+</h:head>
+<h:body>
+
+	<p:menubar styleClass="widget menu-top" autoSubmenuDisplay="true">
+		<p:submenu label="File" icon="ui-icon-document">
+			<p:menuitem value="Import" url="#" />
+			<p:menuitem value="Logout" url="#" />
+		</p:submenu>
+		<p:menuitem value="Logout" url="#" />
+	</p:menubar>
+
+	<p:layout style="min-height:440px;" id="layout">
+
+		<p:layoutUnit position="west" size="230">
+			<p:menu style="width:214px;">
+				<p:submenu label="Charts">
+					<p:menuitem value="Account Balance over time" url="index.jsf?chart=accountBalanceAsLineChart" />
+				</p:submenu>
+			</p:menu>
+		</p:layoutUnit>
+
+		<p:layoutUnit position="center">
+			<ui:include src="WEB-INF/charts/#{param['chart']}.xhtml" /> 
+		</p:layoutUnit>
+
+	</p:layout>
+
+</h:body>
+</html>

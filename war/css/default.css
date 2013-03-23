@@ -1,0 +1,16 @@
+.ui-widget {
+	font-size: 12px !important;
+}
+
+.widget {
+	margin: 3px;
+}
+
+#form .widget {
+	margin: 5px;
+}
+
+#form .widget.chart {
+	height:400px;
+	width:95%;
+}

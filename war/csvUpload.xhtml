@@ -1,0 +1,15 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Insert title here</title>
+</head>
+<body>
+
+	<form action="uploadCsvFile.servlet?accountNumber=#{param['accountNumber']}" enctype="multipart/form-data" method="post">
+		<input name="csvFile" type="file" size="50" maxlength="100000" accept="text/csv" />
+		<input value="Submit" type="submit" />
+	</form>
+
+</body>
+</html>

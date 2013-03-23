@@ -25,7 +25,7 @@
 	<classpathentry kind="lib" path="war/WEB-INF/lib/geronimo-jpa_2.0_spec-1.0.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/guava-14.0.1.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/jdo-api-3.0.1.jar"/>
-	<classpathentry kind="lib" path="war/WEB-INF/lib/joda-time-2.2.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/joda-time-2.2.jar" sourcepath="joda-time-2.2/joda-time-2.2-sources.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/jsr107cache-1.1.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/jta-1.1.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/myfaces-api-2.1.10.jar"/>

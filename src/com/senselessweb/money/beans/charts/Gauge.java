@@ -9,9 +9,10 @@ import org.primefaces.model.chart.MeterGaugeChartModel;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Collections2;
+import com.senselessweb.money.beans.AbstractBean;
 
 @ManagedBean
-public class Gauge extends AbstractChartBean
+public class Gauge extends AbstractBean
 {
 
 	/**

@@ -11,8 +11,10 @@ import org.joda.time.DateTime;
 import org.primefaces.model.chart.CartesianChartModel;
 import org.primefaces.model.chart.ChartSeries;
 
+import com.senselessweb.money.beans.AbstractBean;
+
 @ManagedBean
-public class AccountBalanceAsLineChart extends AbstractChartBean
+public class AccountBalanceAsLineChart extends AbstractBean
 {
 
 	private Date startDate;

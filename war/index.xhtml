@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui" xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:f="http://java.sun.com/jsf/core">
- 
+
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>Money charts</title>
@@ -11,13 +11,12 @@
 
 	<p:menubar styleClass="widget menu-top" autoSubmenuDisplay="true">
 		<p:submenu label="File" icon="ui-icon-document">
-			<p:menuitem value="Import" url="#" />
-			<p:menuitem value="Logout" url="#" />
+			<p:menuitem value="Import" onclick="uploadDialog.show();" url="#" />
 		</p:submenu>
 		<p:menuitem value="Logout" url="#" />
 	</p:menubar>
 
-	<p:layout style="min-height:440px;" id="layout">
+	<p:layout style="min-height:440px;" styleClass="widget" id="layout">
 
 		<p:layoutUnit position="west" size="230">
 			<p:menu style="width:214px;">
@@ -29,10 +28,33 @@
 		</p:layoutUnit>
 
 		<p:layoutUnit position="center">
-			<ui:include src="WEB-INF/pages/#{empty param['page'] ? 'gauge' : param['page']}.xhtml" /> 
+			<ui:include src="WEB-INF/pages/#{empty param['page'] ? 'gauge' : param['page']}.xhtml" />
 		</p:layoutUnit>
 
 	</p:layout>
+
+	<!-- Upload dialog -->
+	<p:dialog header="Upload" widgetVar="uploadDialog" modal="true" height="200" width="350">
+
+		<h:form id="uploadForm">
+			<p:wizard widgetVar="uploadWizard">
+
+				<p:tab id="account" title="Select account">
+					<h:messages errorClass="error" />
+					<div class="widget" style="margin-top:20px">Please select an account to update the csv file for:</div>
+					<p:autoComplete required="true" value="#{upload.accountNumber}" styleClass="widget" dropdown="true"
+						completeMethod="#{upload.getAccountNumbers}" />
+				</p:tab>
+
+				<p:tab id="upload" title="Upload file">
+					<div class="widget" style="margin-top:20px;">Please select the csv file to upload for the account #{upload.accountNumber}:</div>
+					<iframe marginheight="0" marginwidth="0" frameborder="0" id="uploadIFrame" width="330" height="80"
+						src="csvUpload.jsf?accountNumber=#{upload.accountNumber}" />
+					<p:button value="Close" style="float:right;"/>  
+				</p:tab>
+			</p:wizard>
+		</h:form>
+	</p:dialog>
 
 </h:body>
 </html>

@@ -43,9 +43,10 @@ public class UploadCsvFileServlet extends HttpServlet
 					final FileItemStream item = iter.next();
 					if (!item.isFormField()) 
 					{
+						final AccountStorage accountStorage = (AccountStorage) req.getSession().getAttribute("accountStorage");
 						final CsvParser parser = new CsvParser();
-						parser.setAccountStorage(new AccountStorage());
-						parser.parseAndStore(item.openStream(), accountNumber);
+						parser.parseAndStore(accountStorage, item.openStream(), accountNumber);
+						accountStorage.clearCache();
 						resp.getWriter().write("Ok");
 					}
 				}

@@ -1,10 +1,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>CSV Upload</title>
-</head>
-<body>
+<html xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>CSV Upload</title>
+	<link type="text/css" rel="stylesheet" href="#{request.contextPath}/css/default.css" />
+</h:head>
+<h:body>
 
 	<!--
 	It seems that no jsf/primefaces upload implementation works in the app engine because 
@@ -12,10 +13,11 @@
   	is the reason for this simple plain upload servlet. 
 	-->
 
-	<form action="uploadCsvFile.servlet?accountNumber=#{param['accountNumber']}" enctype="multipart/form-data" method="post">
-		<input name="csvFile" type="file" size="50" maxlength="100000" accept="text/csv" />
-		<input value="Submit" type="submit" />
+	<form action="uploadCsvFile.servlet?accountNumber=#{param['accountNumber']}" id="iFrameUploadForm" enctype="multipart/form-data"
+		method="post">
+		<input name="csvFile" type="file" accept="text/csv" style="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-left" />
+		<p:commandButton value="Upload file" onclick="jQuery('#iFrameUploadForm').submit();" />
 	</form>
 
-</body>
+</h:body>
 </html>

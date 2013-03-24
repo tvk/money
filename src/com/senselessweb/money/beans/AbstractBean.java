@@ -1,4 +1,6 @@
-package com.senselessweb.money.beans.charts;
+package com.senselessweb.money.beans;
+
+import java.util.List;
 
 import javax.faces.bean.ManagedProperty;
 
@@ -7,7 +9,7 @@ import org.joda.time.format.DateTimeFormatter;
 
 import com.senselessweb.money.storage.AccountStorage;
 
-public class AbstractChartBean
+public abstract class AbstractBean
 {
 
 	@ManagedProperty("#{accountStorage}")
@@ -19,5 +21,10 @@ public class AbstractChartBean
 	public void setAccountStorage(AccountStorage accountStorage)
 	{
 		this.accountStorage = accountStorage;
+	}
+	
+	public List<Long> getAccountNumbers()
+	{
+		return this.accountStorage.getAccountNumbers();
 	}
 }

@@ -18,3 +18,8 @@
 #form .widget.floating {
 	float:left;
 }
+
+
+#uploadForm .ui-wizard-step-title {
+	font-size: 12px;
+}

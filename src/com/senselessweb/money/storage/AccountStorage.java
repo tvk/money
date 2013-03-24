@@ -178,5 +178,10 @@ public class AccountStorage implements Serializable
 			maximum = Math.max(maximum, (Double) entity.getProperty("balance"));
 		return maximum;
 	}
+
+	public void clearCache()
+	{
+		this.cache.clear();
+	}
 	
 }

@@ -20,17 +20,21 @@
 	<classpathentry kind="lib" path="war/WEB-INF/lib/datanucleus-api-jpa-3.1.1.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/datanucleus-appengine-2.1.1.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/datanucleus-core-3.1.1.jar"/>
-	<classpathentry kind="lib" path="war/WEB-INF/lib/el-api-1.1.jar"/>
-	<classpathentry kind="lib" path="war/WEB-INF/lib/el-impl-1.1.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/geronimo-jpa_2.0_spec-1.0.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/guava-14.0.1.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/jdo-api-3.0.1.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/joda-time-2.2.jar" sourcepath="joda-time-2.2/joda-time-2.2-sources.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/jsr107cache-1.1.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/jta-1.1.jar"/>
-	<classpathentry kind="lib" path="war/WEB-INF/lib/myfaces-api-2.1.10.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/myfaces-api-2.1.10.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="file:/home/thomas/development/googleappengine/Money/myfaces-core-2.1.10-bin/javadoc/"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/myfaces-impl-2.1.10.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/opencsv-2.3.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/primefaces-3.5.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/el-api-1.1.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/el-impl-1.1.jar"/>
 	<classpathentry kind="output" path="war/WEB-INF/classes"/>
 </classpath>

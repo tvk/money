@@ -5,25 +5,15 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
 
 import org.joda.time.DateMidnight;
 import org.joda.time.DateTime;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
 import org.primefaces.model.chart.CartesianChartModel;
 import org.primefaces.model.chart.ChartSeries;
 
-import com.senselessweb.money.storage.AccountStorage;
-
 @ManagedBean
-public class AccountBalanceAsLineChart
+public class AccountBalanceAsLineChart extends AbstractChartBean
 {
-
-	@ManagedProperty("#{accountStorage}")
-	private AccountStorage accountStorage;
-	
-	private final DateTimeFormatter formatter = DateTimeFormat.forPattern("yyyy-MM-dd");
 
 	private Date startDate;
 
@@ -75,10 +65,5 @@ public class AccountBalanceAsLineChart
 	public Date getEndDate()
 	{
 		return this.endDate;
-	}
-
-	public void setAccountStorage(AccountStorage accountStorage)
-	{
-		this.accountStorage = accountStorage;
 	}
 }

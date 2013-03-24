@@ -167,5 +167,16 @@ public class AccountStorage implements Serializable
 			result.add((Long) entity.getProperty("accountNumber"));
 		return Lists.newArrayList(result);
 	}
+
+	/**
+	 * Returns the all-time maximum balance of an account
+	 */
+	public double getAbsoluteMaximum(final long accountNumber)
+	{
+		double maximum = 0;
+		for (final Entity entity : this.getAccountActivitiesInternal(accountNumber, null, null))
+			maximum = Math.max(maximum, (Double) entity.getProperty("balance"));
+		return maximum;
+	}
 	
 }

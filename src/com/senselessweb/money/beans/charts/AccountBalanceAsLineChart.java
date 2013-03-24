@@ -3,6 +3,7 @@ package com.senselessweb.money.beans.charts;
 import java.util.Date;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 
@@ -27,6 +28,13 @@ public class AccountBalanceAsLineChart
 	private Date startDate;
 
 	private Date endDate;
+	
+	@PostConstruct
+	private void init()
+	{
+		this.startDate = this.accountStorage.getEarliestEntryTime().toDate();
+		this.endDate = this.accountStorage.getLatestEntryTime().toDate();
+	}
 
 	public CartesianChartModel getModel()
 	{
@@ -35,7 +43,7 @@ public class AccountBalanceAsLineChart
 				new DateTime(this.startDate.getTime()) : this.accountStorage.getEarliestEntryTime();
 		final DateTime end = this.endDate != null ? 
 				new DateTime(this.endDate.getTime()) : this.accountStorage.getLatestEntryTime();
-		final List<DateMidnight> representiveDates = RepresentiveDates.getRepresentiveDates(start, end, 20);		
+		final List<DateMidnight> representiveDates = RepresentiveDates.getRepresentiveDates(start, end, 120);		
 		
 		for (final Long accountNumber : this.accountStorage.getAccountNumbers())
 		{

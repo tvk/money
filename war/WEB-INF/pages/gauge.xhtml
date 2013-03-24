@@ -1,0 +1,16 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui" xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<h:form id="form">
+
+		<p:lineChart value="#{accountBalanceAsLineChart.model}" legendPosition="e" title="Account balance over time"
+			id="chart" widgetVar="chart" styleClass="widget chart" animate="true" xaxisAngle="45" />
+		  
+		<span class="widget">Change the time period:</span> 
+		<p:calendar value="#{accountBalanceAsLineChart.startDate}" showButtonPanel="true" id="calStartDate" styleClass="widget"/>
+		<p:calendar value="#{accountBalanceAsLineChart.endDate}" showButtonPanel="true" id="calEndDate" styleClass="widget"/>
+		<p:commandButton value="Update chart" update="form" id="ajax" styleClass="ui-priority-primary widget"/> 
+		
+	</h:form>
+
+</html>

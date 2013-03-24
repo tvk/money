@@ -1,8 +1,11 @@
 package com.senselessweb.money.storage;
 
 import java.io.Serializable;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
+import java.util.Map;
 import java.util.TreeSet;
 
 import javax.faces.bean.ManagedBean;
@@ -17,6 +20,9 @@ import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
 import com.google.appengine.api.datastore.Query;
+import com.google.appengine.api.datastore.Query.CompositeFilter;
+import com.google.appengine.api.datastore.Query.CompositeFilterOperator;
+import com.google.appengine.api.datastore.Query.Filter;
 import com.google.appengine.api.datastore.Query.FilterOperator;
 import com.google.appengine.api.datastore.Query.FilterPredicate;
 import com.google.appengine.api.users.User;
@@ -31,7 +37,7 @@ public class AccountStorage implements Serializable
 
 	private static final long serialVersionUID = 9015005680419291230L;
 
-	private final Cache cache = new Cache();
+	private final Map<Query, Collection<Entity>> cache = new HashMap<Query, Collection<Entity>>();
 	
 	/**
 	 * Stores a new account activity. If it is already stored, it will be replaced.
@@ -49,7 +55,8 @@ public class AccountStorage implements Serializable
 		currency = StringUtils.normalizeSpace(currency);
 		
 		final Key key = KeyFactory.createKey("AccountActivity", 
-				user.getUserId() + date.getMillis() + receiver + description + reason + currency + amount + balance);
+				accountNumber + user.getUserId() + date.getMillis() + receiver + 
+				description + reason + currency + amount + balance);
 		
 		final Entity entity = new Entity(key);
 		entity.setProperty("user", user.getUserId());
@@ -95,21 +102,22 @@ public class AccountStorage implements Serializable
 	 */
 	private Iterable<Entity> getAccountActivitiesInternal(final Long accountNumber, final DateTime from, final DateTime until)
 	{
-		if (this.cache.contains(accountNumber, from, until))
-			return this.cache.get(accountNumber, from, until);
-		
 		final Query q = new Query("AccountActivity");
-		if (accountNumber != null)
-			q.setFilter(new FilterPredicate("accountNumber", FilterOperator.EQUAL, accountNumber));
-		q.setFilter(new FilterPredicate("user", FilterOperator.EQUAL, UserServiceFactory.getUserService().getCurrentUser().getUserId()));
-		if (from != null)
-			q.setFilter(new FilterPredicate("date", FilterOperator.GREATER_THAN_OR_EQUAL, from.getMillis()));
-		if (until != null)
-			q.setFilter(new FilterPredicate("date", FilterOperator.LESS_THAN_OR_EQUAL, from.getMillis()));
+		final Collection<Filter> filters = new HashSet<Filter>();
+		filters.add(new FilterPredicate("user", FilterOperator.EQUAL, UserServiceFactory.getUserService().getCurrentUser().getUserId()));
+		filters.add(new FilterPredicate("accountNumber", FilterOperator.GREATER_THAN, 0));
+		if (accountNumber != null) filters.add(
+				new FilterPredicate("accountNumber", FilterOperator.EQUAL, accountNumber));
+		if (from != null) filters.add(
+				new FilterPredicate("date", FilterOperator.GREATER_THAN_OR_EQUAL, from.getMillis()));
+		if (until != null) filters.add(
+				new FilterPredicate("date", FilterOperator.LESS_THAN_OR_EQUAL, from.getMillis()));
+		final CompositeFilter filter = new CompositeFilter(CompositeFilterOperator.AND, filters);
+		q.setFilter(filter);
 		
-		final Set<Entity> result = Sets.newHashSet(DatastoreServiceFactory.getDatastoreService().prepare(q).asIterable());
-		this.cache.put(accountNumber, from, until, result);
-		return result;
+		if (!this.cache.containsKey(q))
+			this.cache.put(q, Sets.newHashSet(DatastoreServiceFactory.getDatastoreService().prepare(q).asIterable()));
+		return this.cache.get(q);
 	}
 	
 	public DateTime getEarliestEntryTime()

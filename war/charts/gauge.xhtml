@@ -6,7 +6,7 @@
 
 	<ui:define name="content">
 
-		<h:form id="gaugeForm">
+		<h:form id="form">
 
 			<c:forEach var="model" items="#{gauge.models}">
 				<p:meterGaugeChart id="gauge-#{model.accountNumber}" value="#{model.chartModel}" style="width:400px;height:300px" label="€"

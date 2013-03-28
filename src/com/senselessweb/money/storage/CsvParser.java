@@ -3,6 +3,7 @@ package com.senselessweb.money.storage;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.charset.Charset;
 import java.util.Arrays;
 import java.util.logging.Logger;
 
@@ -30,7 +31,7 @@ public class CsvParser
 	{
 		try
 		{
-			final CSVReader reader = new CSVReader(new InputStreamReader(csv), ';');
+			final CSVReader reader = new CSVReader(new InputStreamReader(csv, Charset.forName("ISO-8859-1")), ';');
 			for (String[] line = reader.readNext(); line != null; line = reader.readNext())
 				this.parseAndStore(accountStorage, accountNumber, line);
 			try

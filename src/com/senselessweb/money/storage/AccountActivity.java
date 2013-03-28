@@ -1,34 +1,36 @@
 package com.senselessweb.money.storage;
 
+import java.util.Date;
+
 import org.joda.time.DateTime;
 
 public class AccountActivity implements Comparable<AccountActivity>
 {
 
-	private final long accountNumber;
+	private long accountNumber;
 	
-	private final DateTime date;
+	private DateTime dateTime;
 	
-	private final String receiver;
+	private String receiver;
 	
-	private final String description;
+	private String description;
 	
-	private final String reason;
+	private String reason;
 	
-	private final String currency;
+	private String currency;
 	
 	/** The amount of this transaction, may be negative */
-	private final double amount;
+	private double amount;
 	
 	/** The amount of money after this transaction */
-	private final double balance;
+	private double balance;
 	
 	public AccountActivity(final long accountNumber,
 			final DateTime date, final String receiver, final String description, 
 			final String reason, final String currency, final double amount, final double balance)
 	{
 		this.accountNumber = accountNumber;
-		this.date = date;
+		this.dateTime = date;
 		this.receiver = receiver;
 		this.description = description;
 		this.reason = reason;
@@ -37,14 +39,33 @@ public class AccountActivity implements Comparable<AccountActivity>
 		this.balance = balance;
 	}
 	
+	public AccountActivity()
+	{
+	}
+	
 	public long getAccountNumber()
 	{
 		return this.accountNumber;
 	}
 	
-	public DateTime getDate()
+	public void setAccountNumber(long accountNumber)
 	{
-		return this.date;
+		this.accountNumber = accountNumber;
+	}
+	
+	public DateTime getDateTime()
+	{
+		return this.dateTime;
+	}
+	
+	public void setDateTime(DateTime date)
+	{
+		this.dateTime = date;
+	}
+	
+	public Date getDate()
+	{
+		return this.dateTime.toDate();
 	}
 	
 	public String getReceiver()
@@ -52,9 +73,19 @@ public class AccountActivity implements Comparable<AccountActivity>
 		return this.receiver;
 	}
 	
+	public void setReceiver(String receiver)
+	{
+		this.receiver = receiver;
+	}
+	
 	public String getDescription()
 	{
 		return this.description;
+	}
+	
+	public void setDescription(String description)
+	{
+		this.description = description;
 	}
 	
 	public String getReason()
@@ -62,9 +93,19 @@ public class AccountActivity implements Comparable<AccountActivity>
 		return this.reason;
 	}
 	
+	public void setReason(String reason)
+	{
+		this.reason = reason;
+	}
+	
 	public String getCurrency()
 	{
 		return this.currency;
+	}
+	
+	public void setCurrency(String currency)
+	{
+		this.currency = currency;
 	}
 	
 	public double getAmount()
@@ -72,14 +113,24 @@ public class AccountActivity implements Comparable<AccountActivity>
 		return this.amount;
 	}
 	
+	public void setAmount(double amount)
+	{
+		this.amount = amount;
+	}
+	
 	public double getBalance()
 	{
 		return this.balance;
 	}
 	
+	public void setBalance(double balance)
+	{
+		this.balance = balance;
+	}
+	
 	@Override
 	public int compareTo(final AccountActivity o)
 	{
-		return this.date.compareTo(o.date);
+		return this.dateTime.compareTo(o.dateTime);
 	}
 }

@@ -9,7 +9,7 @@ import com.google.common.collect.Collections2;
 import com.google.common.collect.Lists;
 
 @ManagedBean
-public class Upload extends AbstractBean
+public class Upload extends SupportBean
 {
 
 	private Long accountNumber;

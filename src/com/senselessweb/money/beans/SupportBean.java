@@ -2,6 +2,7 @@ package com.senselessweb.money.beans;
 
 import java.util.List;
 
+import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 
 import org.joda.time.format.DateTimeFormat;
@@ -9,13 +10,14 @@ import org.joda.time.format.DateTimeFormatter;
 
 import com.senselessweb.money.storage.AccountStorage;
 
-public abstract class AbstractBean
+@ManagedBean
+public class SupportBean
 {
 
 	@ManagedProperty("#{accountStorage}")
 	protected AccountStorage accountStorage;
 	
-	protected final DateTimeFormatter formatter = DateTimeFormat.forPattern("yyyy-MM-dd");
+	protected static final DateTimeFormatter formatter = DateTimeFormat.forPattern("yyyy-MM-dd");
 
 
 	public void setAccountStorage(AccountStorage accountStorage)

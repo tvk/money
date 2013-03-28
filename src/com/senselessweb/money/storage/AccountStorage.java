@@ -149,7 +149,7 @@ public class AccountStorage implements Serializable
 		// activity before
 		for (int i = 0; i < activities.size(); i++)
 		{
-			if (activities.get(i).getDate().isAfter(date))
+			if (activities.get(i).getDateTime().isAfter(date))
 				return i == 0 ? activities.get(0).getBalance() : activities.get(i - 1).getBalance(); 
 		}
 		

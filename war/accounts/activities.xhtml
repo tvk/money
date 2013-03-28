@@ -1,0 +1,70 @@
+<ui:composition template="/WEB-INF/template.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+	<f:metadata>
+		<f:viewParam name="account" value="#{activitiesBean.account}" />
+	</f:metadata>
+
+	<ui:define name="title">Account activities</ui:define>
+
+	<ui:define name="content">
+
+		<h:form id="form">
+
+			<p:dataTable id="dataTable" var="activity" value="#{activitiesBean.activities}" paginator="true" rows="21"
+				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">
+				
+				<f:facet name="header">Account activities: #{activitiesBean.account}</f:facet>
+
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Date" />
+					</f:facet>
+					<h:outputText value="#{activity.date}">
+						<f:convertDateTime pattern="dd.MM.yyyy" />
+					</h:outputText>
+				</p:column>
+
+				<p:column filterBy="#{activity.receiver}" filterMatchMode="contains">
+					<f:facet name="header">
+						<h:outputText value="Receiver" />
+					</f:facet>
+					<h:outputText value="#{activity.receiver}" />
+				</p:column>
+
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Description" />
+					</f:facet>
+					<h:outputText value="#{activity.description}" />
+				</p:column>
+
+				<p:column filterBy="#{activity.reason}" filterMatchMode="contains">
+					<f:facet name="header">
+						<h:outputText value="Reason" />
+					</f:facet>
+					<h:outputText value="#{activity.reason}" />
+				</p:column>
+
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Amount" />
+					</f:facet>
+					<h:outputText value="#{activity.amount}" />
+				</p:column>
+
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Balance" />
+					</f:facet>
+					<h:outputText value="#{activity.balance}" />
+				</p:column>
+				
+			</p:dataTable>
+			
+		</h:form>
+
+	</ui:define>
+
+</ui:composition>

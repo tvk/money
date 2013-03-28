@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui" xmlns:c="http://java.sun.com/jsp/jstl/core">
 <h:head>
 	<title><ui:insert name="title">Money</ui:insert></title>
 	<link type="text/css" rel="stylesheet" href="#{request.contextPath}/css/default.css" />
@@ -11,7 +11,7 @@
 
 		<p:menubar styleClass="widget menu-top" autoSubmenuDisplay="true">
 			<p:submenu label="File" icon="ui-icon-document">
-				<p:menuitem value="Import" onclick="window.open('upload.jsf', '','width=350,height=200');" url="#" />
+				<p:menuitem value="Import" onclick="window.open('/upload.jsf', '','width=350,height=200');" url="#" />
 			</p:submenu>
 			<p:menuitem value="Logout" url="#" />
 		</p:menubar>
@@ -20,6 +20,11 @@
 
 			<p:layoutUnit position="west" size="230">
 				<p:menu style="width:214px;">
+					<c:forEach items="#{supportBean.accountNumbers}" var="account">
+						<p:submenu label="Account #{account}">
+							<p:menuitem value="Activities overview" url="/accounts/activities.jsf?account=#{account}" />
+						</p:submenu>
+					</c:forEach>
 					<p:submenu label="Charts">
 						<p:menuitem value="Current balances" url="/charts/gauge.jsf" />
 						<p:menuitem value="Account Balance over time" url="/charts/accountBalance.jsf" />

@@ -1,50 +1,12 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui" xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:f="http://java.sun.com/jsf/core">
+<ui:composition template="/WEB-INF/template.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui" xmlns:ui="http://java.sun.com/jsf/facelets">
 
-<h:head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<title>Money charts</title>
-	<link type="text/css" rel="stylesheet" href="#{request.contextPath}/css/default.css" />
-	<script type="text/javascript">
-		window.myfaces = window.myfaces || {};
-		myfaces.config = myfaces.config || {};
-		//set the config part
-		myfaces.config.no_portlet_env = true; 
-	</script>
-</h:head>
-<h:body>
+	<ui:define name="title">Money</ui:define>
 
-	<f:view>
+	<ui:define name="content">
+
+		<h2 style="margin:40px;">Welcome to Money !!!</h2> 
 		
-		<p:menubar styleClass="widget menu-top" autoSubmenuDisplay="true">
-			<p:submenu label="File" icon="ui-icon-document">
-				<p:menuitem value="Import" onclick="window.open('upload.jsf', '','width=350,height=200');" url="#" />
-			</p:submenu>
-			<p:menuitem value="Logout" url="#" />
-		</p:menubar>
+	</ui:define>
 	
-		<p:layout style="min-height:600px;" styleClass="widget" id="layout">
-	
-			<p:layoutUnit position="west" size="230">
-				<p:menu style="width:214px;">
-					<p:submenu label="Charts">
-						<p:menuitem value="Current balances" url="index.jsf?page=gauge" />
-						<p:menuitem value="Account Balance over time" url="index.jsf?page=accountBalanceAsLineChart" />
-					</p:submenu>
-				</p:menu>
-			</p:layoutUnit>
-	
-			<p:layoutUnit position="center">
-				<!--<ui:include src="WEB-INF/pages/accountBalanceAsLineChart.xhtml" />-->
-				<ui:include src="WEB-INF/pages/#{empty param['page'] ? 'gauge' : param['page']}.xhtml" />
-			</p:layoutUnit>
-	
-		</p:layout>
-		
-	</f:view>
-	
-	<ui:debug /> 
-	
-</h:body>
-</html>
+</ui:composition>

@@ -1,0 +1,22 @@
+<ui:composition template="/WEB-INF/template.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui" xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<ui:define name="title">Account balances over time</ui:define>
+
+	<ui:define name="content">
+
+		<h:form id="form">
+
+			<p:lineChart value="#{accountBalanceAsLineChart.model}" legendPosition="e" title="Account balance over time" id="chart"
+				styleClass="widget chart" animate="true" xaxisAngle="45" widgetVar="chart" />
+
+			<span class="widget">Change the time period:</span>
+			<p:calendar value="#{accountBalanceAsLineChart.startDate}" showButtonPanel="true" id="calStartDate" styleClass="widget" />
+			<p:calendar value="#{accountBalanceAsLineChart.endDate}" showButtonPanel="true" id="calEndDate" styleClass="widget" />
+			<p:commandButton value="Update chart" id="ajax" update="chart" styleClass="ui-priority-primary widget" />
+
+		</h:form>
+		
+	</ui:define>
+	
+</ui:composition>

@@ -3,7 +3,6 @@ package com.senselessweb.money.storage;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.text.NumberFormat;
 import java.util.Arrays;
 import java.util.logging.Logger;
 
@@ -59,15 +58,19 @@ public class CsvParser
 		{
 			try
 			{
-				final Number amount = NumberFormat.getInstance().parse(line[5]);
-				final Number balance = NumberFormat.getInstance().parse(line[7]);
-
-				accountStorage.storeAccountActivity(accountNumber, DateTime.parse(line[0], fmt), line[2], line[3], line[4], line[6],
-						amount.doubleValue(), balance.doubleValue());
+				accountStorage.storeAccountActivity(accountNumber, DateTime.parse(line[0], fmt), 
+						line[2], line[3], line[4], line[6],
+						parseMoneyAmount(line[5]), parseMoneyAmount(line[7]));
 			} catch (final Exception e)
 			{
 				log.info("Could not read line " + Arrays.toString(line));
 			}
 		}
+	}
+	
+	private static double parseMoneyAmount(final String amount)
+	{
+		final String parsed = amount.replaceAll("\\.", "").replaceAll(",", ".");
+		return Double.parseDouble(parsed);
 	}
 }

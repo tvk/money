@@ -24,8 +24,10 @@ public class AccountBalanceAsLineChart extends AbstractBean
 	@PostConstruct
 	private void init()
 	{
-		this.startDate = this.accountStorage.getEarliestEntryTime().toDate();
-		this.endDate = this.accountStorage.getLatestEntryTime().toDate();
+		this.startDate = this.accountStorage.getEarliestEntryTime() == null ? null : 
+			this.accountStorage.getEarliestEntryTime().toDate();
+		this.endDate = this.accountStorage.getLatestEntryTime() == null ? null :
+			this.accountStorage.getLatestEntryTime().toDate();
 	}
 
 	public CartesianChartModel getModel()

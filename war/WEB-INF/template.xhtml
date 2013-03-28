@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title><ui:insert name="title">Money</ui:insert></title>
+	<link type="text/css" rel="stylesheet" href="#{request.contextPath}/css/default.css" />
+</h:head>
+<h:body>
+
+	<f:view>
+
+		<p:menubar styleClass="widget menu-top" autoSubmenuDisplay="true">
+			<p:submenu label="File" icon="ui-icon-document">
+				<p:menuitem value="Import" onclick="window.open('upload.jsf', '','width=350,height=200');" url="#" />
+			</p:submenu>
+			<p:menuitem value="Logout" url="#" />
+		</p:menubar>
+
+		<p:layout style="min-height:600px;" styleClass="widget" id="layout">
+
+			<p:layoutUnit position="west" size="230">
+				<p:menu style="width:214px;">
+					<p:submenu label="Charts">
+						<p:menuitem value="Current balances" url="/charts/gauge.jsf" />
+						<p:menuitem value="Account Balance over time" url="/charts/accountBalance.jsf" />
+					</p:submenu>
+				</p:menu>
+			</p:layoutUnit>
+
+			<p:layoutUnit position="center">
+				<ui:insert name="content">Default content</ui:insert>
+			</p:layoutUnit>
+
+		</p:layout>
+
+	</f:view>
+
+	<ui:debug />
+
+</h:body>
+</html>

@@ -1,6 +1,7 @@
 package com.senselessweb.money.beans.charts;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.joda.time.DateMidnight;
@@ -17,6 +18,8 @@ public class RepresentiveDates
 			final DateTime startDate, final DateTime endDate, final int desiredSteps)
 	{
 
+		if (endDate == null || startDate == null) return Collections.emptyList();
+		
 		final DateMidnight start = startDate.toDateMidnight();
 		final long numberOfDays = (endDate.getMillis() - startDate.getMillis()) / (1000*60*60*24);
 		final long numberOfWeeks = (endDate.getMillis() - startDate.getMillis()) / (1000*60*60*24*7);

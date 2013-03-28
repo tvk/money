@@ -125,7 +125,7 @@ public class AccountStorage implements Serializable
 		long time = Long.MAX_VALUE;
 		for (final Entity entity : this.getAccountActivitiesInternal(null, null, null))
 			time = Math.min(time, (Long) entity.getProperty("date"));
-		return new DateTime(time);
+		return time == 0 ? null : new DateTime(time);
 	}
 	
 	public DateTime getLatestEntryTime()
@@ -133,7 +133,7 @@ public class AccountStorage implements Serializable
 		long time = 0;
 		for (final Entity entity : this.getAccountActivitiesInternal(null, null, null))
 			time = Math.max(time, (Long) entity.getProperty("date"));
-		return new DateTime(time);
+		return time == 0 ? null : new DateTime(time);
 	}
 	
 	/**

@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:f="http://java.sun.com/jsf/core">
+	
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Upload CSV file</title>
+	<link type="text/css" rel="stylesheet" href="#{request.contextPath}/css/default.css" />
+</h:head>
+<h:body>
+
+	<h:form id="uploadForm">
+
+		<p:wizard widgetVar="uploadWizard">
+
+			<p:tab id="account" title="Select account">
+				<h:messages errorClass="error" />
+				<div class="widget" style="margin-top: 20px">Please select an account to update the csv file for:</div>
+				<p:autoComplete required="true" value="#{upload.accountNumber}" styleClass="widget" dropdown="true"
+					completeMethod="#{upload.getAccountNumbers}" />
+			</p:tab>
+
+			<p:tab id="upload" title="Upload file">
+				<div class="widget" style="margin-top: 20px;">Please select the csv file to upload for the account #{upload.accountNumber}:</div>
+				<iframe marginheight="0" marginwidth="0" frameborder="0" id="uploadIFrame" width="330" height="80"
+					src="upload.iframe.jsf?accountNumber=#{upload.accountNumber}" />
+				<p:button value="Close" href="#" onclick="window.close();" style="float:right;" />
+			</p:tab>
+
+		</p:wizard>
+
+	</h:form>
+
+</h:body>
+</html>

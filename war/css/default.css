@@ -6,16 +6,16 @@
 	margin: 3px;
 }
 
-#form .widget {
+form .widget {
 	margin: 5px;
 }
 
-#form .widget.chart {
+form .widget.chart {
 	height:400px;
 	width:95%;
 }
 
-#form .widget.floating {
+form .widget.floating {
 	float:left;
 }
 

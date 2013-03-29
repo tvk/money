@@ -35,9 +35,9 @@ import com.google.common.collect.Sets;
 @ApplicationScoped
 public class AccountStorage implements Serializable
 {
-
-	private static final long serialVersionUID = 9015005680419291230L;
 	
+	private static final long serialVersionUID = 1980059118241321329L;
+
 	private static final Logger log = Logger.getLogger(AccountStorage.class.getCanonicalName());
 
 	@SuppressWarnings("unchecked")

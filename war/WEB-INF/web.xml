@@ -8,11 +8,15 @@
 		<param-name>javax.faces.DEFAULT_SUFFIX</param-name>
 		<param-value>.xhtml</param-value>
 	</context-param>
+	<context-param>
+		<param-name>primefaces.THEME</param-name>
+		<param-value>#{preferencesBean.theme}</param-value>
+	</context-param>
 
 	<welcome-file-list>
 		<welcome-file>index.jsf</welcome-file>
 	</welcome-file-list>
-	
+
 	<filter>
 		<filter-name>UserAuthentificatedFilter</filter-name>
 		<filter-class>com.senselessweb.money.web.UserAuthentificatedFilter</filter-class>

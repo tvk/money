@@ -36,5 +36,6 @@
 	<classpathentry kind="lib" path="war/WEB-INF/lib/primefaces-3.5.jar" sourcepath="primefaces-3.5/primefaces-3.5-sources.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/el-api-1.1.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/el-impl-1.1.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/all-themes-1.0.9.jar"/>
 	<classpathentry kind="output" path="war/WEB-INF/classes"/>
 </classpath>

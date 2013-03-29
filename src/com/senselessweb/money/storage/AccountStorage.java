@@ -2,15 +2,16 @@ package com.senselessweb.money.storage;
 
 import java.io.Serializable;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeSet;
+import java.util.logging.Logger;
 
+import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
 
+import org.apache.commons.collections.map.LRUMap;
 import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
 import org.joda.time.ReadableDateTime;
@@ -27,17 +28,20 @@ import com.google.appengine.api.datastore.Query.FilterOperator;
 import com.google.appengine.api.datastore.Query.FilterPredicate;
 import com.google.appengine.api.users.User;
 import com.google.appengine.api.users.UserServiceFactory;
-import com.google.appengine.labs.repackaged.com.google.common.collect.Lists;
-import com.google.appengine.labs.repackaged.com.google.common.collect.Sets;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 
 @ManagedBean
-@SessionScoped
+@ApplicationScoped
 public class AccountStorage implements Serializable
 {
 
 	private static final long serialVersionUID = 9015005680419291230L;
+	
+	private static final Logger log = Logger.getLogger(AccountStorage.class.getCanonicalName());
 
-	private final Map<Query, Collection<Entity>> cache = new HashMap<Query, Collection<Entity>>();
+	@SuppressWarnings("unchecked")
+	private final Map<Query, Collection<Entity>> cache = new LRUMap(50);
 	
 	/**
 	 * Stores a new account activity. If it is already stored, it will be replaced.
@@ -116,7 +120,10 @@ public class AccountStorage implements Serializable
 		q.setFilter(filter);
 		
 		if (!this.cache.containsKey(q))
+		{
+			log.info("New query: " + q);
 			this.cache.put(q, Sets.newHashSet(DatastoreServiceFactory.getDatastoreService().prepare(q).asIterable()));
+		}
 		return this.cache.get(q);
 	}
 	
